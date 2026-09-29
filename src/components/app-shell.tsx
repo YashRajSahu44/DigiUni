@@ -24,7 +24,6 @@ import {
   ShieldCheck,
   Sparkles,
   User,
-  Users,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
@@ -40,6 +39,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { AiChat } from "@/components/ai-chat";
+import { Toaster } from "@/components/ui/sonner";
 import { notifications, searchIndex, student } from "@/lib/demo-data";
 import { cn } from "@/lib/utils";
 
@@ -78,7 +78,6 @@ const nav = [
     items: [
       { to: "/app/ai", label: "DigiUni AI", icon: Bot },
       { to: "/app/learning", label: "Personalized Learning", icon: Lightbulb },
-      { to: "/app/insights", label: "Performance Insights", icon: Sparkles },
     ],
   },
 ];
@@ -108,7 +107,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
           </div>
           <div className="space-y-0.5">
             {section.items.map((item) => {
-              const active = pathname === item.to;
+              const active = item.to === "/app" ? pathname === "/app" || pathname === "/app/" : pathname.startsWith(item.to);
               return (
                 <Link
                   key={item.to}
@@ -140,7 +139,7 @@ function GlobalSearch({ open, onOpenChange }: { open: boolean; onOpenChange: (v:
       <DialogContent className="max-w-xl overflow-hidden p-0">
         <DialogTitle className="sr-only">Search DigiUni</DialogTitle>
         <Command>
-          <CommandInput placeholder="Search services, subjects, notices, tickets…" />
+          <CommandInput placeholder="Search services, subjects, notices…" />
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             {["Service", "Subject", "AI", "Helpdesk", "Certificate"].map((group) => {
@@ -202,14 +201,20 @@ export function AppShell({ children }: { children: ReactNode }) {
         setSearchOpen((v) => !v);
       }
     };
+    const onOpenAi = () => setAiOpen(true);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener("digiuni:open-ai", onOpenAi);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("digiuni:open-ai", onOpenAi);
+    };
   }, []);
 
   const unread = notifications.filter((n) => n.unread).length;
 
   return (
     <div className="min-h-screen bg-background">
+      <Toaster position="top-center" richColors />
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-sidebar-border bg-sidebar lg:flex">
         <div className="px-5 py-4">
           <Brand />
@@ -321,24 +326,12 @@ export function AppShell({ children }: { children: ReactNode }) {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
                     <Link to="/app/profile">
-                      <User className="mr-2 size-4" /> Profile
+                      <User className="mr-2 size-4" /> My Profile
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link to="/app/profile">
                       <Settings className="mr-2 size-4" /> Settings
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuLabel className="text-xs text-muted-foreground">Switch demo role</DropdownMenuLabel>
-                  <DropdownMenuItem asChild>
-                    <Link to="/parent">
-                      <Users className="mr-2 size-4" /> Parent portal
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/admin">
-                      <ShieldCheck className="mr-2 size-4" /> Administrator
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
@@ -356,11 +349,10 @@ export function AppShell({ children }: { children: ReactNode }) {
         <main className="mx-auto w-full max-w-6xl px-4 pb-28 pt-6 sm:px-6 lg:pb-12">{children}</main>
       </div>
 
-      {/* Mobile bottom navigation */}
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-card/95 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden">
         <div className="relative grid grid-cols-5 items-end">
           {bottomNav.slice(0, 2).map((item) => (
-            <BottomLink key={item.to} {...item} active={pathname === item.to} />
+            <BottomLink key={item.to} {...item} active={item.to === "/app" ? pathname === "/app" || pathname === "/app/" : pathname.startsWith(item.to)} />
           ))}
           <div className="flex justify-center">
             <button
@@ -372,7 +364,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             </button>
           </div>
           {bottomNav.slice(2).map((item) => (
-            <BottomLink key={item.to} {...item} active={pathname === item.to} />
+            <BottomLink key={item.to} {...item} active={pathname.startsWith(item.to)} />
           ))}
         </div>
       </div>

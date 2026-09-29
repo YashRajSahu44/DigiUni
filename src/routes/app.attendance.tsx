@@ -1,5 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Bar, PageHeader, Pill, Ring, SectionTitle, Surface } from "@/components/ui-bits";
 import { attendanceTrend, subjects, student } from "@/lib/demo-data";
 
@@ -7,7 +10,10 @@ export const Route = createFileRoute("/app/attendance")({
   head: () => ({
     meta: [
       { title: "Attendance — DigiUni" },
-      { name: "description", content: "Overall and subject-wise attendance, trends and AI guidance to stay above the 75% requirement." },
+      {
+        name: "description",
+        content: "Overall and subject-wise attendance, trends and AI guidance to stay above the 75% requirement.",
+      },
       { property: "og:title", content: "Attendance — DigiUni" },
       { property: "og:description", content: "Subject-wise attendance, monthly trend and AI guidance." },
     ],
@@ -16,12 +22,21 @@ export const Route = createFileRoute("/app/attendance")({
 });
 
 function Attendance() {
+  const [detail, setDetail] = useState<(typeof subjects)[0] | null>(null);
   const attended = subjects.reduce((a, s) => a + s.attended, 0);
   const total = subjects.reduce((a, s) => a + s.total, 0);
 
   return (
     <div>
-      <PageHeader title="Attendance" subtitle={`${student.semester} · Section ${student.section} · Requirement 75%`} />
+      <PageHeader
+        title="Attendance"
+        subtitle={`${student.semester} · Section ${student.section} · Requirement 75%`}
+        action={
+          <Button variant="outline" className="rounded-xl" onClick={() => setDetail(subjects[1])}>
+            View Subject Details
+          </Button>
+        }
+      />
 
       <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
         <Surface className="flex flex-col items-center">
@@ -47,7 +62,7 @@ function Attendance() {
             <SectionTitle>Subject-wise attendance</SectionTitle>
             <div className="space-y-4">
               {subjects.map((s) => (
-                <div key={s.name}>
+                <button key={s.name} className="block w-full text-left" onClick={() => setDetail(s)}>
                   <div className="mb-1.5 flex items-center justify-between gap-2">
                     <div className="min-w-0">
                       <div className="truncate text-sm font-medium">{s.name}</div>
@@ -63,7 +78,7 @@ function Attendance() {
                     </div>
                   </div>
                   <Bar value={s.attendance} tone={s.attendance >= 85 ? "success" : s.attendance >= 75 ? "primary" : "danger"} />
-                </div>
+                </button>
               ))}
             </div>
           </Surface>
@@ -75,10 +90,7 @@ function Attendance() {
                 <div key={m.month} className="flex flex-1 flex-col items-center gap-2">
                   <div className="text-xs font-semibold">{m.value}%</div>
                   <div className="flex w-full flex-1 items-end">
-                    <div
-                      className="brand-gradient w-full rounded-t-lg transition-all duration-700"
-                      style={{ height: `${m.value}%` }}
-                    />
+                    <div className="brand-gradient w-full rounded-t-lg transition-all duration-700" style={{ height: `${m.value}%` }} />
                   </div>
                   <div className="text-xs text-muted-foreground">{m.month}</div>
                 </div>
@@ -91,13 +103,54 @@ function Attendance() {
             <div>
               <div className="text-sm font-semibold">DigiUni AI insight</div>
               <p className="mt-1 text-sm text-foreground/80">
-                Attend at least 3 of your next 4 Data Structures classes to move above 75%. Probability & Statistics needs
-                2 more classes to reach a safe margin.
+                Attend your next 3 Data Structures classes to improve your attendance. Probability & Statistics needs 2 more
+                classes to reach a safe margin.
               </p>
+              <Button asChild variant="link" className="mt-1 h-auto px-0 text-primary">
+                <Link to="/app/ai">Ask DigiUni AI</Link>
+              </Button>
             </div>
           </div>
         </div>
       </div>
+
+      <Dialog open={!!detail} onOpenChange={(o) => !o && setDetail(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{detail?.name}</DialogTitle>
+          </DialogHeader>
+          {detail ? (
+            <div className="space-y-3 text-sm">
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Faculty</span>
+                <span className="font-medium">{detail.faculty}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Attendance</span>
+                <span className="font-medium">{detail.attendance}%</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Classes attended</span>
+                <span className="font-medium">
+                  {detail.attended} / {detail.total}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Classes missed</span>
+                <span className="font-medium">{detail.total - detail.attended}</span>
+              </div>
+              <Bar value={detail.attendance} tone={detail.attendance >= 75 ? "primary" : "danger"} />
+              {detail.attendance < 75 ? (
+                <p className="rounded-lg bg-warning/15 p-3 text-xs text-warning-foreground">
+                  Below 75% requirement. Attend the next few classes to recover.
+                </p>
+              ) : (
+                <p className="rounded-lg bg-success/12 p-3 text-xs text-success">You are meeting the attendance requirement for this subject.</p>
+              )}
+            </div>
+          ) : null}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { GraduationCap, Sparkles, ShieldCheck, Users, BookOpen, ArrowRight, Bot, CreditCard, Bus } from "lucide-react";
+import { GraduationCap, Sparkles, BookOpen, ArrowRight, Bot, CreditCard, Bus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
@@ -9,30 +9,23 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "DigiUni unifies attendance, timetable, fees, hostel, transport, placements and certificates into one AI-powered smart campus platform.",
+          "DigiUni unifies attendance, timetable, fees, hostel, transport, placements and certificates into one AI-powered smart campus platform for students.",
       },
       { property: "og:title", content: "DigiUni — Your University. One Digital Campus." },
       {
         property: "og:description",
-        content: "One AI-powered platform for students, parents, faculty and administrators.",
+        content: "Student digital campus prototype — attendance, fees, hostel, transport and AI in one place.",
       },
     ],
   }),
   component: Landing,
 });
 
-const roles = [
-  { label: "Student", icon: GraduationCap, to: "/app", desc: "Full campus experience" },
-  { label: "Parent", icon: Users, to: "/parent", desc: "Weekly child overview" },
-  { label: "Faculty", icon: BookOpen, to: "/admin", desc: "Class & analytics view" },
-  { label: "Administrator", icon: ShieldCheck, to: "/admin", desc: "Campus-wide intelligence" },
-];
-
 const highlights = [
-  { icon: Bot, title: "DigiUni AI copilot", desc: "Ask about attendance, fees or your next class — in text or voice." },
-  { icon: Sparkles, title: "Personalized learning", desc: "Daily study plans built from your own academic signals." },
-  { icon: CreditCard, title: "Fees & certificates", desc: "Pay dues and download verified digital documents instantly." },
-  { icon: Bus, title: "Hostel & transport", desc: "Room details, complaints, mess menu and live bus tracking." },
+  { icon: Bot, title: "DigiUni AI Copilot", desc: "Ask about attendance, fees or your next class — in text or voice." },
+  { icon: Sparkles, title: "Personalized Learning", desc: "Daily study plans built from your own academic signals." },
+  { icon: CreditCard, title: "Fees & Certificates", desc: "Pay dues and download verified digital documents instantly." },
+  { icon: Bus, title: "Hostel & Transport", desc: "Room details, complaints, mess menu and live bus tracking." },
 ];
 
 function Landing() {
@@ -54,7 +47,8 @@ function Landing() {
           </h1>
           <p className="mt-4 max-w-xl text-base text-muted-foreground">
             Everything you need for your academic and campus journey — attendance, timetable, exams, fees, hostel,
-            transport, placements and certificates — powered by AI.
+            transport, placements and certificates — powered by AI. This prototype demonstrates the{" "}
+            <span className="font-medium text-foreground">student digital campus</span> experience.
           </p>
 
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -74,30 +68,27 @@ function Landing() {
 
         <div className="surface p-6 sm:p-8">
           <h2 className="font-display text-lg font-bold">Sign in to DigiUni</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Choose a demo role to enter the prototype instantly.</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Enter the student demo to access your digital campus.
+          </p>
 
-          <div className="mt-6 grid gap-3">
-            {roles.map((r) => (
-              <Link
-                key={r.label}
-                to={r.to}
-                className="group flex items-center gap-3 rounded-xl border border-border bg-card p-3.5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-[var(--shadow-card)]"
-              >
-                <span className="grid size-10 place-items-center rounded-xl bg-primary-soft text-accent-foreground">
-                  <r.icon className="size-5" />
-                </span>
-                <span className="flex-1">
-                  <span className="block text-sm font-semibold">{r.label}</span>
-                  <span className="block text-xs text-muted-foreground">{r.desc}</span>
-                </span>
-                <ArrowRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
-              </Link>
-            ))}
-          </div>
+          <Link
+            to="/app"
+            className="group mt-6 flex items-center gap-3 rounded-xl border border-border bg-card p-3.5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-[var(--shadow-card)]"
+          >
+            <span className="grid size-10 place-items-center rounded-xl bg-primary-soft text-accent-foreground">
+              <GraduationCap className="size-5" />
+            </span>
+            <span className="flex-1">
+              <span className="block text-sm font-semibold">Student</span>
+              <span className="block text-xs text-muted-foreground">Full campus experience</span>
+            </span>
+            <ArrowRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
+          </Link>
 
           <Button asChild className="mt-6 h-12 w-full rounded-xl text-sm font-semibold">
             <Link to="/app">
-              <Sparkles className="mr-2 size-4" /> Enter student demo
+              <BookOpen className="mr-2 size-4" /> Enter Student Demo
             </Link>
           </Button>
           <p className="mt-4 text-center text-xs text-muted-foreground">

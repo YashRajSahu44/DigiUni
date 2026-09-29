@@ -14,6 +14,7 @@ import {
   Clock,
   ArrowRight,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Pill, SectionTitle, StatCard } from "@/components/ui-bits";
 import { assignments, insights, notices, student, todayTimetable, inr, fees } from "@/lib/demo-data";
 import { cn } from "@/lib/utils";
@@ -48,34 +49,90 @@ const toneFor: Record<string, string> = {
   success: "success",
 };
 
+function openAi() {
+  window.dispatchEvent(new Event("digiuni:open-ai"));
+}
+
 function Dashboard() {
   const now = todayTimetable.find((p) => p.status === "now");
   const next = todayTimetable.find((p) => p.status === "next");
+  const nextClass = next ?? now;
 
   return (
     <div className="space-y-8">
       <section className="surface soft-gradient overflow-hidden p-5 sm:p-6">
-        <p className="text-sm text-muted-foreground">Good morning 👋</p>
-        <h1 className="mt-1 font-display text-2xl font-bold sm:text-3xl">{student.firstName}, here's your campus overview</h1>
+        <p className="text-sm text-muted-foreground">Good morning, {student.firstName} 👋</p>
+        <h1 className="mt-1 font-display text-2xl font-bold sm:text-3xl">Here's your campus overview for today.</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           {student.course} · {student.semester} · Section {student.section}
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Pill tone="primary">Now: {now?.subject ?? "Free period"}</Pill>
-          <Pill tone="violet">Next: {next?.subject} · {next?.room}</Pill>
-          <Pill tone="warning">{inr(fees.pending)} due {fees.due}</Pill>
+          <Pill tone="violet">
+            Next: {next?.subject} · {next?.room}
+          </Pill>
+          <Pill tone="warning">
+            {inr(fees.pending)} due {fees.dueShort}
+          </Pill>
         </div>
       </section>
 
       <section>
         <SectionTitle>Smart overview</SectionTitle>
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
-          <StatCard to="/app/attendance" label="Attendance" value="82%" hint="Overall attendance" sub="2 subjects need attention" icon={<GraduationCap className="size-4.5" />} />
-          <StatCard to="/app/timetable" label="Today's classes" value="4" hint="Next: Artificial Intelligence" sub="11:15 AM · AL-304-P" tone="violet" icon={<CalendarDays className="size-4.5" />} />
-          <StatCard to="/app/fees" label="Fees" value={inr(fees.pending)} hint="Pending" sub={`Due on ${fees.due}`} tone="warning" icon={<CreditCard className="size-4.5" />} />
-          <StatCard to="/app/academics" label="Assignments" value="3" hint="Due this week" sub="Earliest: 01 Oct" tone="teal" icon={<NotebookPen className="size-4.5" />} />
-          <StatCard to="/app/exams" label="Exams" value="12 days" hint="Next examination" sub="Mid-sem begins 10 Oct" tone="danger" icon={<Award className="size-4.5" />} />
-          <StatCard to="/app/certificates" label="Certificates" value="4" hint="Digital certificates" sub="3 ready to download" tone="success" icon={<FileCheck2 className="size-4.5" />} />
+          <StatCard
+            to="/app/attendance"
+            label="Attendance"
+            value="82%"
+            hint="Overall attendance"
+            sub="2 subjects need attention"
+            icon={<GraduationCap className="size-4.5" />}
+          />
+          <StatCard
+            to="/app/timetable"
+            label="Next class"
+            value={nextClass?.subject?.split(" ")[0] === "Artificial" ? "AI" : (nextClass?.subject ?? "—")}
+            hint={nextClass?.subject ?? "—"}
+            sub={`${nextClass?.time.split("–")[0] ?? ""} · ${nextClass?.room ?? ""}`}
+            tone="violet"
+            icon={<CalendarDays className="size-4.5" />}
+          />
+          <StatCard
+            to="/app/fees"
+            label="Fees"
+            value={inr(fees.pending)}
+            hint="Pending"
+            sub={`Due ${fees.dueShort}`}
+            tone="warning"
+            icon={<CreditCard className="size-4.5" />}
+          />
+          <StatCard
+            to="/app/academics"
+            label="Assignments"
+            value="3"
+            hint="Due this week"
+            sub="Earliest: 01 Oct"
+            tone="teal"
+            icon={<NotebookPen className="size-4.5" />}
+          />
+          <StatCard
+            to="/app/exams"
+            label="Exams"
+            value="12 days"
+            hint="Next examination"
+            sub="Mid-sem begins 10 Oct"
+            tone="danger"
+            icon={<Award className="size-4.5" />}
+          />
+          <StatCard
+            to="/app/certificates"
+            label="Certificates"
+            value="4"
+            hint="Available digitally"
+            sub="All verified"
+            tone="success"
+            icon={<FileCheck2 className="size-4.5" />}
+          />
         </div>
       </section>
 
@@ -101,9 +158,9 @@ function Dashboard() {
         <div>
           <SectionTitle
             action={
-              <Link to="/app/insights" className="inline-flex items-center gap-1 text-xs font-medium text-primary">
-                View analysis <ArrowRight className="size-3.5" />
-              </Link>
+              <Button size="sm" className="rounded-full" onClick={openAi}>
+                <Sparkles className="mr-1.5 size-3.5" /> Ask DigiUni AI
+              </Button>
             }
           >
             <span className="inline-flex items-center gap-2">
@@ -156,8 +213,8 @@ function Dashboard() {
         <div>
           <SectionTitle
             action={
-              <Link to="/app/notices" className="text-xs font-medium text-primary">
-                View all
+              <Link to="/app/notices" className="inline-flex items-center gap-1 text-xs font-medium text-primary">
+                View all <ArrowRight className="size-3.5" />
               </Link>
             }
           >

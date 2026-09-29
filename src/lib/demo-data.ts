@@ -9,10 +9,11 @@ export const student = {
   academicYear: "2026–2027",
   email: "aarav.sharma@digiuni.edu.in",
   phone: "+91 98••• ••210",
-  hostel: "Boys Hostel Block A",
+  hostel: "Boys Hostel – Block A",
   room: "A-204",
   bed: "02",
   cgpa: 8.1,
+  creditsCompleted: 72,
   attendance: 82,
   pendingFees: 18500,
   university: "DigiUni Institute of Technology",
@@ -30,9 +31,9 @@ export type Subject = {
 };
 
 export const subjects: Subject[] = [
-  { name: "Artificial Intelligence", short: "AI", faculty: "Verma Mamta Kantilal", attendance: 88, attended: 44, total: 50, marks: 84, grade: "A" },
-  { name: "Data Structures", short: "DS", faculty: "Deepika Dubey", attendance: 71, attended: 32, total: 45, marks: 68, grade: "B" },
-  { name: "Probability & Statistics", short: "P&S", faculty: "R. Nandkumar", attendance: 76, attended: 35, total: 46, marks: 72, grade: "B+" },
+  { name: "Artificial Intelligence", short: "AI", faculty: "Verma Mamta Kantilal", attendance: 88, attended: 44, total: 50, marks: 82, grade: "A" },
+  { name: "Data Structures", short: "DS", faculty: "Deepika Dubey", attendance: 71, attended: 32, total: 45, marks: 76, grade: "B+" },
+  { name: "Probability & Statistics", short: "P&S", faculty: "R. Nandkumar", attendance: 76, attended: 35, total: 46, marks: 81, grade: "A" },
   { name: "Technical Communication", short: "TC", faculty: "Anita Joseph", attendance: 91, attended: 40, total: 44, marks: 88, grade: "A" },
   { name: "Mini Project", short: "MP", faculty: "Dr. Swagatika Lenka", attendance: 95, attended: 19, total: 20, marks: 92, grade: "A+" },
 ];
@@ -64,9 +65,9 @@ export const todayTimetable: Period[] = [
   { time: "09:00–09:45", subject: "Technical Communication", faculty: "Anita Joseph", room: "AL-201", status: "done" },
   { time: "09:45–10:30", subject: "Free Period", faculty: "—", room: "—", status: "free" },
   { time: "10:30–11:15", subject: "Mini Project", faculty: "Dr. Swagatika Lenka", room: "BT-108-P", status: "now" },
-  { time: "11:15–12:00", subject: "Artificial Intelligence", faculty: "Verma Mamta Kantilal", room: "AL-304-P", status: "next" },
+  { time: "11:15–12:00", subject: "Artificial Intelligence", faculty: "Verma Mamta Kantilal Swarnkar", room: "AL-304-P", status: "next" },
   { time: "12:00–12:45", subject: "Data Structures", faculty: "Deepika Dubey", room: "AL-303", status: "upcoming" },
-  { time: "13:30–14:15", subject: "Probability & Statistics", faculty: "R. Nandkumar", room: "AL-210", status: "upcoming" },
+  { time: "14:10–14:50", subject: "Probability & Statistics", faculty: "Dr. Sheela Verma", room: "AL-302", status: "upcoming" },
 ];
 
 export const weekTimetable = [
@@ -86,46 +87,48 @@ export const insights = [
 ];
 
 export const notices = [
+  { category: "Examination", date: "29 Sep 2026", title: "Examination Form Submission", desc: "Submit your mid-semester examination form online by 5 October. Late submissions require Dean approval." },
+  { category: "Placement", date: "02 Oct 2026", title: "Campus Placement Drive", desc: "Zentra Labs campus drive — open to CSE/AIML students with 7.0+ CGPA. Register by 2 October." },
+  { category: "Holiday", date: "02 Oct 2026", title: "Holiday Announcement", desc: "Campus closed on 2 October for Gandhi Jayanti. Library and hostel mess operate on Sunday schedule." },
+  { category: "Event", date: "05 Oct 2026", title: "AI Workshop", desc: "Hands-on workshop on generative AI foundations. Register via DigiUni Events. Limited to 60 seats." },
   { category: "Examination", date: "28 Sep 2026", title: "Mid-semester exam timetable released", desc: "Semester 3 mid-term examinations begin 10 October. Download your hall ticket from the Examination module." },
-  { category: "Placement", date: "27 Sep 2026", title: "Zentra Labs campus drive — register by 2 Oct", desc: "Open to CSE/AIML students with 7.0+ CGPA. 12 roles across ML engineering and data platform." },
-  { category: "Holiday", date: "24 Sep 2026", title: "Campus closed on 2 October", desc: "Gandhi Jayanti holiday. Library and hostel mess operate on Sunday schedule." },
-  { category: "Event", date: "22 Sep 2026", title: "TechnoVerse 2026 — registrations open", desc: "Annual technical fest across 18 events. Team registration closes 5 October." },
-  { category: "Emergency", date: "20 Sep 2026", title: "Water supply maintenance in Block A", desc: "Supply unavailable 11:00–14:00 on 21 September in Boys Hostel Block A." },
   { category: "Academic", date: "18 Sep 2026", title: "Elective registration for Semester 4", desc: "Choose from 14 electives. Registration window: 1–8 October." },
 ];
 
 export const notifications = [
-  { type: "Exams", title: "Hall ticket available", time: "12m ago", unread: true },
-  { type: "Fees", title: "₹18,500 due on 10 Oct", time: "2h ago", unread: true },
-  { type: "Academic", title: "DS lab report deadline moved to Friday", time: "5h ago", unread: true },
-  { type: "Transport", title: "Route 4 running 6 minutes late", time: "Yesterday", unread: false },
-  { type: "Hostel", title: "Complaint #HC-338 marked In Progress", time: "Yesterday", unread: false },
-  { type: "Placement", title: "Zentra Labs drive registration open", time: "2 days ago", unread: false },
+  { type: "Exams", title: "New exam schedule published", time: "2 hours ago", unread: true },
+  { type: "Fees", title: "Fee payment reminder", time: "5 hours ago", unread: true },
+  { type: "Academic", title: "Assignment deadline approaching", time: "Yesterday", unread: true },
+  { type: "Placement", title: "Placement drive announced", time: "Yesterday", unread: false },
+  { type: "Transport", title: "Route 4 running 6 minutes late", time: "2 days ago", unread: false },
+  { type: "Hostel", title: "Complaint #HC-338 marked In Progress", time: "2 days ago", unread: false },
 ];
 
 export const fees = {
-  total: 128500,
-  paid: 110000,
+  total: 95000,
+  paid: 76500,
   pending: 18500,
-  due: "10 Oct 2026",
+  due: "10 October 2026",
+  dueShort: "10 Oct",
   breakdown: [
-    { head: "Tuition fee", amount: 98000, status: "Paid" },
-    { head: "Hostel fee", amount: 22000, status: "Paid" },
-    { head: "Examination fee", amount: 4500, status: "Pending" },
-    { head: "Other charges", amount: 4000, status: "Pending" },
+    { head: "Tuition Fee", amount: 70000, status: "Paid" },
+    { head: "Hostel Fee", amount: 15000, status: "Paid" },
+    { head: "Examination Fee", amount: 5000, status: "Pending" },
+    { head: "Other Charges", amount: 5000, status: "Partial" },
   ],
   history: [
-    { id: "TXN-90231", date: "12 Aug 2026", head: "Tuition fee – Instalment 2", amount: 49000, mode: "Net banking" },
-    { id: "TXN-88117", date: "04 Jul 2026", head: "Hostel fee", amount: 22000, mode: "UPI" },
-    { id: "TXN-85002", date: "18 Jun 2026", head: "Tuition fee – Instalment 1", amount: 49000, mode: "Net banking" },
+    { id: "TXN-90231", date: "12 Aug 2026", head: "Tuition Fee – Instalment 2", amount: 35000, mode: "Net banking", status: "Paid" },
+    { id: "TXN-88117", date: "04 Jul 2026", head: "Hostel Fee", amount: 15000, mode: "UPI", status: "Paid" },
+    { id: "TXN-85002", date: "18 Jun 2026", head: "Tuition Fee – Instalment 1", amount: 35000, mode: "Net banking", status: "Paid" },
+    { id: "TXN-84011", date: "10 Jun 2026", head: "Other Charges (partial)", amount: 1500, mode: "UPI", status: "Paid" },
   ],
 };
 
 export const certificates = [
-  { name: "Bonafide Certificate", issued: "12 Sep 2026", id: "DU-BON-2026-0192", status: "Issued" },
-  { name: "Semester 2 Marksheet", issued: "30 Jun 2026", id: "DU-MRK-2026-0192", status: "Issued" },
-  { name: "Course Completion – ML Foundations", issued: "22 Aug 2026", id: "DU-CRS-2026-0455", status: "Issued" },
-  { name: "Character Certificate", issued: "—", id: "DU-CHR-2026-0192", status: "Processing" },
+  { name: "Participation Certificate", subtitle: "Hackathon 2026", issued: "15 Sep 2026", id: "DU-HCK-2026-0192", status: "Verified" },
+  { name: "Course Completion Certificate", subtitle: "AI Fundamentals", issued: "22 Aug 2026", id: "DU-CRS-2026-0455", status: "Verified" },
+  { name: "Internship Certificate", subtitle: "Machine Learning Internship", issued: "30 Jul 2026", id: "DU-INT-2026-0088", status: "Verified" },
+  { name: "Academic Certificate", subtitle: "Semester Achievement", issued: "30 Jun 2026", id: "DU-ACH-2026-0192", status: "Verified" },
 ];
 
 export const hostelComplaints = [
@@ -158,21 +161,38 @@ export const transport = {
 
 export const placements = {
   profileCompletion: 82,
-  applications: 5,
+  eligible: 8,
+  applications: 3,
+  upcomingDrives: 4,
   interviews: 2,
   companies: [
-    { name: "Zentra Labs", role: "ML Engineer Intern", ctc: "₹12 LPA", date: "06 Oct", eligible: true, match: 92 },
-    { name: "Northwind Systems", role: "Software Engineer", ctc: "₹9.5 LPA", date: "11 Oct", eligible: true, match: 78 },
-    { name: "Cobalt Analytics", role: "Data Analyst", ctc: "₹8 LPA", date: "15 Oct", eligible: true, match: 71 },
-    { name: "Helio Fintech", role: "Backend Engineer", ctc: "₹11 LPA", date: "20 Oct", eligible: false, match: 54 },
+    { name: "Zentra Labs", role: "ML Engineer Intern", ctc: "₹12 LPA", date: "06 Oct", deadline: "02 Oct 2026", eligible: true, match: 92, applied: false },
+    { name: "Northwind Systems", role: "Software Engineer", ctc: "₹9.5 LPA", date: "11 Oct", deadline: "08 Oct 2026", eligible: true, match: 78, applied: true },
+    { name: "Cobalt Analytics", role: "Data Analyst", ctc: "₹8 LPA", date: "15 Oct", deadline: "12 Oct 2026", eligible: true, match: 71, applied: false },
+    { name: "Helio Fintech", role: "Backend Engineer", ctc: "₹11 LPA", date: "20 Oct", deadline: "18 Oct 2026", eligible: false, match: 54, applied: false },
+    { name: "Nova Soft", role: "AI Research Intern", ctc: "₹10 LPA", date: "22 Oct", deadline: "15 Oct 2026", eligible: true, match: 85, applied: true },
+    { name: "Pixel Forge", role: "Full Stack Intern", ctc: "₹7 LPA", date: "25 Oct", deadline: "20 Oct 2026", eligible: true, match: 66, applied: false },
   ],
   skills: ["System design basics", "SQL window functions", "Model evaluation metrics"],
 };
 
 export const library = {
+  issuedCount: 4,
+  dueSoon: 2,
+  overdue: 0,
   issued: [
-    { title: "Introduction to Algorithms", author: "Cormen et al.", due: "05 Oct 2026", fine: 0 },
-    { title: "Artificial Intelligence: A Modern Approach", author: "Russell & Norvig", due: "28 Sep 2026", fine: 20 },
+    { title: "Data Structures & Algorithms", author: "Cormen et al.", due: "04 Oct 2026", fine: 0 },
+    { title: "Artificial Intelligence", author: "Russell & Norvig", due: "08 Oct 2026", fine: 0 },
+    { title: "Probability for Data Science", author: "Stanley Chan", due: "12 Oct 2026", fine: 0 },
+    { title: "Designing Data-Intensive Applications", author: "Martin Kleppmann", due: "18 Oct 2026", fine: 0 },
+  ],
+  catalog: [
+    { title: "Introduction to Algorithms", author: "Cormen et al.", available: 3 },
+    { title: "Deep Learning", author: "Goodfellow et al.", available: 1 },
+    { title: "Clean Code", author: "Robert C. Martin", available: 5 },
+    { title: "The Pragmatic Programmer", author: "Hunt & Thomas", available: 2 },
+    { title: "Hands-On Machine Learning", author: "Aurélien Géron", available: 0 },
+    { title: "Bayesian Reasoning", author: "Pearl & Mackenzie", available: 4 },
   ],
   recommended: [
     { title: "Probability for Data Science", author: "Stanley Chan" },
@@ -214,52 +234,49 @@ export const resources = [
   { title: "Heuristic search notes (Unit 3)", type: "Notes", subject: "Artificial Intelligence", mins: 30 },
 ];
 
-export const calendarEvents: Record<number, { label: string; kind: "holiday" | "exam" | "event" }> = {
-  2: { label: "Gandhi Jayanti", kind: "holiday" },
-  5: { label: "TechnoVerse registration closes", kind: "event" },
-  10: { label: "Mid-sem: AI", kind: "exam" },
-  12: { label: "Mid-sem: DS", kind: "exam" },
-  14: { label: "Mid-sem: P&S", kind: "exam" },
-  16: { label: "Mid-sem: TC", kind: "exam" },
-  20: { label: "Alumni meet", kind: "event" },
-  25: { label: "Dussehra break", kind: "holiday" },
+export const calendarEvents: Record<string, { label: string; kind: "holiday" | "exam" | "event" | "academic" }[]> = {
+  "2026-09-02": [{ label: "Gandhi Jayanti (observed prep)", kind: "holiday" }],
+  "2026-09-20": [{ label: "Alumni meet planning", kind: "event" }],
+  "2026-09-29": [{ label: "Regular Classes", kind: "academic" }, { label: "Exam form reminder", kind: "event" }],
+  "2026-09-30": [{ label: "Assignment Deadline — TC draft", kind: "academic" }],
+  "2026-10-02": [{ label: "Gandhi Jayanti", kind: "holiday" }],
+  "2026-10-05": [{ label: "AI Workshop", kind: "event" }, { label: "TechnoVerse registration closes", kind: "event" }],
+  "2026-10-10": [{ label: "Mid-sem: AI", kind: "exam" }],
+  "2026-10-12": [{ label: "Mid-sem: DS", kind: "exam" }],
+  "2026-10-14": [{ label: "Mid-sem: P&S", kind: "exam" }],
+  "2026-10-16": [{ label: "Mid-sem: TC", kind: "exam" }],
+  "2026-10-20": [{ label: "Alumni meet", kind: "event" }],
+  "2026-10-25": [{ label: "Dussehra break", kind: "holiday" }],
 };
 
-export const riskStudents = [
-  { name: "Ishan Kapoor", roll: "CSE/2026/0211", risk: "High", attendance: 58, assignments: 40, factors: ["Attendance decline", "Missed 4 assignments", "Fee overdue 45 days"], action: "Academic counsellor follow-up" },
-  { name: "Meera Nair", roll: "CSE/2026/0148", risk: "Moderate", attendance: 69, assignments: 65, factors: ["Attendance decline", "Reduced assignment submission"], action: "Mentor check-in this week" },
-  { name: "Aarav Sharma", roll: "CSE/2026/0192", risk: "Moderate", attendance: 82, assignments: 75, factors: ["One subject below 75%", "Recent assessment dip"], action: "Subject-level support for Data Structures" },
-  { name: "Rhea Dsouza", roll: "CSE/2026/0176", risk: "Low", attendance: 91, assignments: 95, factors: ["Stable engagement"], action: "No intervention needed" },
+export const previousResult = {
+  semester: "Semester 2",
+  sgpa: 8.2,
+  status: "Passed",
+  credits: 22,
+};
+
+export const backlogs: { subject: string; semester: string; status: string }[] = [];
+
+export const leaveRequests = [
+  { id: "LR-112", from: "18 Sep 2026", to: "18 Sep 2026", reason: "Medical", status: "Approved" },
+  { id: "LR-098", from: "02 Sep 2026", to: "03 Sep 2026", reason: "Family function", status: "Approved" },
 ];
 
-export const adminStats = [
-  { label: "Active students", value: "8,412" },
-  { label: "Average attendance", value: "84%" },
-  { label: "Open helpdesk tickets", value: "126" },
-  { label: "Fee collection", value: "91%" },
-];
-
-export const departmentAttendance = [
-  { dept: "CSE", value: 86 },
-  { dept: "ECE", value: 82 },
-  { dept: "MECH", value: 78 },
-  { dept: "CIVIL", value: 74 },
-  { dept: "MBA", value: 88 },
-];
-
-export const helpdeskVolume = [
-  { week: "W1", tickets: 82 },
-  { week: "W2", tickets: 96 },
-  { week: "W3", tickets: 74 },
-  { week: "W4", tickets: 126 },
+export const hostelNotices = [
+  { title: "Water supply maintenance", date: "20 Sep 2026", body: "Block A water supply unavailable 11:00–14:00 on 21 September." },
+  { title: "Mess timing change", date: "15 Sep 2026", body: "Dinner served until 21:30 on weekdays during mid-sem week." },
 ];
 
 export const searchIndex = [
-  { title: "Attendance Status", group: "Service", to: "/app/attendance" },
+  { title: "Attendance", group: "Service", to: "/app/attendance" },
   { title: "Subject-wise Attendance", group: "Service", to: "/app/attendance" },
+  { title: "Attendance Policy", group: "Service", to: "/app/attendance" },
   { title: "Timetable", group: "Service", to: "/app/timetable" },
   { title: "Examination & Results", group: "Service", to: "/app/exams" },
   { title: "Fees & Payments", group: "Service", to: "/app/fees" },
+  { title: "Payment History", group: "Service", to: "/app/fees" },
+  { title: "Fee Receipt", group: "Service", to: "/app/fees" },
   { title: "Digital Certificates", group: "Service", to: "/app/certificates" },
   { title: "Hostel Management", group: "Service", to: "/app/hostel" },
   { title: "Transport & Bus Tracking", group: "Service", to: "/app/transport" },
@@ -268,12 +285,14 @@ export const searchIndex = [
   { title: "Student Helpdesk", group: "Service", to: "/app/helpdesk" },
   { title: "News & Notices", group: "Service", to: "/app/notices" },
   { title: "Personalized Learning", group: "Service", to: "/app/learning" },
+  { title: "DigiUni AI", group: "AI", to: "/app/ai" },
   { title: "DigiUni AI Assistant", group: "AI", to: "/app/ai" },
   { title: "Data Structures — Deepika Dubey", group: "Subject", to: "/app/academics" },
   { title: "Artificial Intelligence — Verma Mamta", group: "Subject", to: "/app/academics" },
   { title: "Ticket #DU1024", group: "Helpdesk", to: "/app/helpdesk" },
   { title: "Bonafide Certificate", group: "Certificate", to: "/app/certificates" },
   { title: "Profile & Settings", group: "Service", to: "/app/profile" },
+  { title: "Calendar", group: "Service", to: "/app/calendar" },
 ];
 
 export const inr = (n: number) => `₹${n.toLocaleString("en-IN")}`;

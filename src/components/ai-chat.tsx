@@ -9,7 +9,7 @@ type Msg = { role: "ai" | "user"; text: string };
 
 const greeting: Msg = {
   role: "ai",
-  text: "Hi! I'm DigiUni AI. I can see your attendance, timetable, fees, exams and campus services. How can I help you today?",
+  text: "Hi Aarav 👋 What can I help you with? I can see your attendance, timetable, fees, exams and campus services.",
 };
 
 export function AiChat({ compact = false }: { compact?: boolean }) {

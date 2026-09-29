@@ -12,7 +12,23 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppAcademicsRouteImport } from './routes/app.academics'
+import { Route as AppAiRouteImport } from './routes/app.ai'
 import { Route as AppAttendanceRouteImport } from './routes/app.attendance'
+import { Route as AppCalendarRouteImport } from './routes/app.calendar'
+import { Route as AppCertificatesRouteImport } from './routes/app.certificates'
+import { Route as AppExamsRouteImport } from './routes/app.exams'
+import { Route as AppFeesRouteImport } from './routes/app.fees'
+import { Route as AppHelpdeskRouteImport } from './routes/app.helpdesk'
+import { Route as AppHostelRouteImport } from './routes/app.hostel'
+import { Route as AppLearningRouteImport } from './routes/app.learning'
+import { Route as AppLibraryRouteImport } from './routes/app.library'
+import { Route as AppNoticesRouteImport } from './routes/app.notices'
+import { Route as AppPlacementsRouteImport } from './routes/app.placements'
+import { Route as AppProfileRouteImport } from './routes/app.profile'
+import { Route as AppServicesRouteImport } from './routes/app.services'
+import { Route as AppTimetableRouteImport } from './routes/app.timetable'
+import { Route as AppTransportRouteImport } from './routes/app.transport'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,36 +45,224 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAcademicsRoute = AppAcademicsRouteImport.update({
+  id: '/academics',
+  path: '/academics',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAiRoute = AppAiRouteImport.update({
+  id: '/ai',
+  path: '/ai',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppAttendanceRoute = AppAttendanceRouteImport.update({
   id: '/attendance',
   path: '/attendance',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCalendarRoute = AppCalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCertificatesRoute = AppCertificatesRouteImport.update({
+  id: '/certificates',
+  path: '/certificates',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppExamsRoute = AppExamsRouteImport.update({
+  id: '/exams',
+  path: '/exams',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppFeesRoute = AppFeesRouteImport.update({
+  id: '/fees',
+  path: '/fees',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHelpdeskRoute = AppHelpdeskRouteImport.update({
+  id: '/helpdesk',
+  path: '/helpdesk',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHostelRoute = AppHostelRouteImport.update({
+  id: '/hostel',
+  path: '/hostel',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLearningRoute = AppLearningRouteImport.update({
+  id: '/learning',
+  path: '/learning',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLibraryRoute = AppLibraryRouteImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNoticesRoute = AppNoticesRouteImport.update({
+  id: '/notices',
+  path: '/notices',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPlacementsRoute = AppPlacementsRouteImport.update({
+  id: '/placements',
+  path: '/placements',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppServicesRoute = AppServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTimetableRoute = AppTimetableRouteImport.update({
+  id: '/timetable',
+  path: '/timetable',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTransportRoute = AppTransportRouteImport.update({
+  id: '/transport',
+  path: '/transport',
   getParentRoute: () => AppRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/app/academics': typeof AppAcademicsRoute
+  '/app/ai': typeof AppAiRoute
   '/app/attendance': typeof AppAttendanceRoute
+  '/app/calendar': typeof AppCalendarRoute
+  '/app/certificates': typeof AppCertificatesRoute
+  '/app/exams': typeof AppExamsRoute
+  '/app/fees': typeof AppFeesRoute
+  '/app/helpdesk': typeof AppHelpdeskRoute
+  '/app/hostel': typeof AppHostelRoute
+  '/app/learning': typeof AppLearningRoute
+  '/app/library': typeof AppLibraryRoute
+  '/app/notices': typeof AppNoticesRoute
+  '/app/placements': typeof AppPlacementsRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/services': typeof AppServicesRoute
+  '/app/timetable': typeof AppTimetableRoute
+  '/app/transport': typeof AppTransportRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app/academics': typeof AppAcademicsRoute
+  '/app/ai': typeof AppAiRoute
   '/app/attendance': typeof AppAttendanceRoute
+  '/app/calendar': typeof AppCalendarRoute
+  '/app/certificates': typeof AppCertificatesRoute
+  '/app/exams': typeof AppExamsRoute
+  '/app/fees': typeof AppFeesRoute
+  '/app/helpdesk': typeof AppHelpdeskRoute
+  '/app/hostel': typeof AppHostelRoute
+  '/app/learning': typeof AppLearningRoute
+  '/app/library': typeof AppLibraryRoute
+  '/app/notices': typeof AppNoticesRoute
+  '/app/placements': typeof AppPlacementsRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/services': typeof AppServicesRoute
+  '/app/timetable': typeof AppTimetableRoute
+  '/app/transport': typeof AppTransportRoute
   '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
+  '/app/academics': typeof AppAcademicsRoute
+  '/app/ai': typeof AppAiRoute
   '/app/attendance': typeof AppAttendanceRoute
+  '/app/calendar': typeof AppCalendarRoute
+  '/app/certificates': typeof AppCertificatesRoute
+  '/app/exams': typeof AppExamsRoute
+  '/app/fees': typeof AppFeesRoute
+  '/app/helpdesk': typeof AppHelpdeskRoute
+  '/app/hostel': typeof AppHostelRoute
+  '/app/learning': typeof AppLearningRoute
+  '/app/library': typeof AppLibraryRoute
+  '/app/notices': typeof AppNoticesRoute
+  '/app/placements': typeof AppPlacementsRoute
+  '/app/profile': typeof AppProfileRoute
+  '/app/services': typeof AppServicesRoute
+  '/app/timetable': typeof AppTimetableRoute
+  '/app/transport': typeof AppTransportRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/app/attendance' | '/app/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/app/academics'
+    | '/app/ai'
+    | '/app/attendance'
+    | '/app/calendar'
+    | '/app/certificates'
+    | '/app/exams'
+    | '/app/fees'
+    | '/app/helpdesk'
+    | '/app/hostel'
+    | '/app/learning'
+    | '/app/library'
+    | '/app/notices'
+    | '/app/placements'
+    | '/app/profile'
+    | '/app/services'
+    | '/app/timetable'
+    | '/app/transport'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/app/attendance' | '/app'
-  id: '__root__' | '/' | '/app' | '/app/attendance' | '/app/'
+  to:
+    | '/'
+    | '/app/academics'
+    | '/app/ai'
+    | '/app/attendance'
+    | '/app/calendar'
+    | '/app/certificates'
+    | '/app/exams'
+    | '/app/fees'
+    | '/app/helpdesk'
+    | '/app/hostel'
+    | '/app/learning'
+    | '/app/library'
+    | '/app/notices'
+    | '/app/placements'
+    | '/app/profile'
+    | '/app/services'
+    | '/app/timetable'
+    | '/app/transport'
+    | '/app'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/app/academics'
+    | '/app/ai'
+    | '/app/attendance'
+    | '/app/calendar'
+    | '/app/certificates'
+    | '/app/exams'
+    | '/app/fees'
+    | '/app/helpdesk'
+    | '/app/hostel'
+    | '/app/learning'
+    | '/app/library'
+    | '/app/notices'
+    | '/app/placements'
+    | '/app/profile'
+    | '/app/services'
+    | '/app/timetable'
+    | '/app/transport'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -89,6 +293,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/academics': {
+      id: '/app/academics'
+      path: '/academics'
+      fullPath: '/app/academics'
+      preLoaderRoute: typeof AppAcademicsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/ai': {
+      id: '/app/ai'
+      path: '/ai'
+      fullPath: '/app/ai'
+      preLoaderRoute: typeof AppAiRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/attendance': {
       id: '/app/attendance'
       path: '/attendance'
@@ -96,16 +314,146 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAttendanceRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/calendar': {
+      id: '/app/calendar'
+      path: '/calendar'
+      fullPath: '/app/calendar'
+      preLoaderRoute: typeof AppCalendarRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/certificates': {
+      id: '/app/certificates'
+      path: '/certificates'
+      fullPath: '/app/certificates'
+      preLoaderRoute: typeof AppCertificatesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/exams': {
+      id: '/app/exams'
+      path: '/exams'
+      fullPath: '/app/exams'
+      preLoaderRoute: typeof AppExamsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/fees': {
+      id: '/app/fees'
+      path: '/fees'
+      fullPath: '/app/fees'
+      preLoaderRoute: typeof AppFeesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/helpdesk': {
+      id: '/app/helpdesk'
+      path: '/helpdesk'
+      fullPath: '/app/helpdesk'
+      preLoaderRoute: typeof AppHelpdeskRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/hostel': {
+      id: '/app/hostel'
+      path: '/hostel'
+      fullPath: '/app/hostel'
+      preLoaderRoute: typeof AppHostelRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/learning': {
+      id: '/app/learning'
+      path: '/learning'
+      fullPath: '/app/learning'
+      preLoaderRoute: typeof AppLearningRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/library': {
+      id: '/app/library'
+      path: '/library'
+      fullPath: '/app/library'
+      preLoaderRoute: typeof AppLibraryRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/notices': {
+      id: '/app/notices'
+      path: '/notices'
+      fullPath: '/app/notices'
+      preLoaderRoute: typeof AppNoticesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/placements': {
+      id: '/app/placements'
+      path: '/placements'
+      fullPath: '/app/placements'
+      preLoaderRoute: typeof AppPlacementsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/profile': {
+      id: '/app/profile'
+      path: '/profile'
+      fullPath: '/app/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/services': {
+      id: '/app/services'
+      path: '/services'
+      fullPath: '/app/services'
+      preLoaderRoute: typeof AppServicesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/timetable': {
+      id: '/app/timetable'
+      path: '/timetable'
+      fullPath: '/app/timetable'
+      preLoaderRoute: typeof AppTimetableRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/transport': {
+      id: '/app/transport'
+      path: '/transport'
+      fullPath: '/app/transport'
+      preLoaderRoute: typeof AppTransportRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppAcademicsRoute: typeof AppAcademicsRoute
+  AppAiRoute: typeof AppAiRoute
   AppAttendanceRoute: typeof AppAttendanceRoute
+  AppCalendarRoute: typeof AppCalendarRoute
+  AppCertificatesRoute: typeof AppCertificatesRoute
+  AppExamsRoute: typeof AppExamsRoute
+  AppFeesRoute: typeof AppFeesRoute
+  AppHelpdeskRoute: typeof AppHelpdeskRoute
+  AppHostelRoute: typeof AppHostelRoute
+  AppLearningRoute: typeof AppLearningRoute
+  AppLibraryRoute: typeof AppLibraryRoute
+  AppNoticesRoute: typeof AppNoticesRoute
+  AppPlacementsRoute: typeof AppPlacementsRoute
+  AppProfileRoute: typeof AppProfileRoute
+  AppServicesRoute: typeof AppServicesRoute
+  AppTimetableRoute: typeof AppTimetableRoute
+  AppTransportRoute: typeof AppTransportRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAcademicsRoute: AppAcademicsRoute,
+  AppAiRoute: AppAiRoute,
   AppAttendanceRoute: AppAttendanceRoute,
+  AppCalendarRoute: AppCalendarRoute,
+  AppCertificatesRoute: AppCertificatesRoute,
+  AppExamsRoute: AppExamsRoute,
+  AppFeesRoute: AppFeesRoute,
+  AppHelpdeskRoute: AppHelpdeskRoute,
+  AppHostelRoute: AppHostelRoute,
+  AppLearningRoute: AppLearningRoute,
+  AppLibraryRoute: AppLibraryRoute,
+  AppNoticesRoute: AppNoticesRoute,
+  AppPlacementsRoute: AppPlacementsRoute,
+  AppProfileRoute: AppProfileRoute,
+  AppServicesRoute: AppServicesRoute,
+  AppTimetableRoute: AppTimetableRoute,
+  AppTransportRoute: AppTransportRoute,
   AppIndexRoute: AppIndexRoute,
 }
 

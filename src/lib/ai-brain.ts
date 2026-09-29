@@ -3,14 +3,14 @@ import { student, subjects, fees, todayTimetable, examSchedule, transport, certi
 export const suggestedPrompts = [
   "What is my attendance?",
   "When is my next class?",
-  "Show my exam schedule",
-  "How much are my pending fees?",
-  "Where is my classroom?",
-  "Help me apply for a certificate",
+  "How much fee is pending?",
   "What should I study today?",
-  "Raise a hostel complaint",
+  "When is my next exam?",
+  "Show my certificates.",
   "Track my bus",
+  "Raise a hostel complaint",
   "Contact the helpdesk",
+  "Where is my classroom?",
 ];
 
 /** Rule-based demo assistant over local mock campus data. */
@@ -20,7 +20,8 @@ export function answer(question: string): string {
 
   if (q.includes("attendance")) {
     const low = subjects.filter((s) => s.attendance < 75).map((s) => `${s.name} (${s.attendance}%)`);
-    return `Your overall attendance is ${student.attendance}%.${low.length ? ` ${low.join(", ")} ${low.length > 1 ? "are" : "is"} currently below the 75% requirement.` : " All subjects are above the 75% requirement."}`;
+    const ds = subjects.find((s) => s.name.includes("Data Structures"));
+    return `Your overall attendance is ${student.attendance}%.${ds ? ` Data Structures is currently your lowest-attendance subject at ${ds.attendance}%. You have attended ${ds.attended} of ${ds.total} classes.` : ""}${low.length ? ` Subjects needing attention: ${low.join(", ")}.` : ""}`;
   }
   if (q.includes("next class") || q.includes("classroom") || q.includes("where is my")) {
     return next
@@ -35,8 +36,8 @@ export function answer(question: string): string {
     return `You have ${inr(fees.pending)} pending — examination fee and other charges — due on ${fees.due}. You can pay from the Fees & Payments page.`;
   }
   if (q.includes("certificate")) {
-    const ready = certificates.filter((c) => c.status === "Issued").length;
-    return `You have ${ready} issued certificates ready to download, and 1 request in processing. To apply for a new one, open Digital Certificates and choose "Request certificate".`;
+    const ready = certificates.filter((c) => c.status === "Verified" || c.status === "Issued").length;
+    return `You have ${ready} verified certificates ready to download. To apply for a new one, open Digital Certificates and choose "Request certificate".`;
   }
   if (q.includes("study") || q.includes("learn") || q.includes("revise")) {
     return "Today's recommended focus: Data Structures 40 min (weakest area), Probability & Statistics 30 min (exam in 14 days), Artificial Intelligence 45 min (high weightage). This is a suggestion based on your demo records, not a guarantee.";
