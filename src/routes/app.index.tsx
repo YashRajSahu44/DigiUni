@@ -56,7 +56,6 @@ function openAi() {
 function Dashboard() {
   const now = todayTimetable.find((p) => p.status === "now");
   const next = todayTimetable.find((p) => p.status === "next");
-  const nextClass = next ?? now;
 
   return (
     <div className="space-y-8">
@@ -91,9 +90,9 @@ function Dashboard() {
           <StatCard
             to="/app/timetable"
             label="Next class"
-            value={nextClass?.subject?.split(" ")[0] === "Artificial" ? "AI" : (nextClass?.subject ?? "—")}
-            hint={nextClass?.subject ?? "—"}
-            sub={`${nextClass?.time.split("–")[0] ?? ""} · ${nextClass?.room ?? ""}`}
+            value="AI"
+            hint="Artificial Intelligence"
+            sub="11:15 AM · AL-304-P"
             tone="violet"
             icon={<CalendarDays className="size-4.5" />}
           />
