@@ -73,10 +73,3 @@ Key routes under `/app`:
 | `/app/ai`         | DigiUni AI                |
 | `/app/learning`   | Personalized learning     |
 
-## Built with Lovable
-
-This project was built with [Lovable](https://lovable.dev). You can keep editing it in the [Lovable editor](https://lovable.dev/projects/aefe9370-a300-4001-83fb-bb603cb4024e); changes sync with this repository.
-
-## License
-
-Private / prototype — all rights reserved unless otherwise noted.
