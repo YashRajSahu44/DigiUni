@@ -124,6 +124,68 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    const root = document.documentElement;
+    const storedTheme = localStorage.getItem("digiuni-theme");
+    const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const preferredTheme = storedTheme === "dark" || storedTheme === "light" ? storedTheme : systemDark ? "dark" : "light";
+
+    root.classList.toggle("dark", preferredTheme === "dark");
+    root.style.colorScheme = preferredTheme;
+    localStorage.setItem("digiuni-theme", preferredTheme);
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleSystemThemeChange = (event: MediaQueryListEvent) => {
+      if (!localStorage.getItem("digiuni-theme")) {
+        root.classList.toggle("dark", event.matches);
+        root.style.colorScheme = event.matches ? "dark" : "light";
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleSystemThemeChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleSystemThemeChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const playClickSound = () => {
+      const AudioCtor = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      if (!AudioCtor) return;
+
+      const ctx = (window as typeof window & { __digiuniAudioCtx?: AudioContext }).__digiuniAudioCtx ?? new AudioCtor();
+      (window as typeof window & { __digiuniAudioCtx?: AudioContext }).__digiuniAudioCtx = ctx;
+
+      if (ctx.state === "suspended") {
+        void ctx.resume();
+      }
+
+      const oscillator = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+      const now = ctx.currentTime;
+
+      oscillator.type = "triangle";
+      oscillator.frequency.setValueAtTime(580, now);
+      oscillator.frequency.exponentialRampToValueAtTime(830, now + 0.08);
+
+      gainNode.gain.setValueAtTime(0.0001, now);
+      gainNode.gain.exponentialRampToValueAtTime(0.035, now + 0.01);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+
+      oscillator.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      oscillator.start(now);
+      oscillator.stop(now + 0.13);
+    };
+
+    document.addEventListener("click", playClickSound, { passive: true });
+
+    return () => {
+      document.removeEventListener("click", playClickSound);
+    };
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}

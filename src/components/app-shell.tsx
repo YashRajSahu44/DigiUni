@@ -19,10 +19,12 @@ import {
   LogOut,
   Megaphone,
   Menu,
+  MoonStar,
   Search,
   Settings,
   ShieldCheck,
   Sparkles,
+  SunMedium,
   User,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -192,7 +194,21 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [aiOpen, setAiOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  useEffect(() => {
+    const syncTheme = () => {
+      const nextDark = document.documentElement.classList.contains("dark");
+      setDarkMode(nextDark);
+    };
+
+    syncTheme();
+    const observer = new MutationObserver(syncTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -209,6 +225,15 @@ export function AppShell({ children }: { children: ReactNode }) {
       window.removeEventListener("digiuni:open-ai", onOpenAi);
     };
   }, []);
+
+  const toggleTheme = () => {
+    const root = document.documentElement;
+    const nextTheme = darkMode ? "light" : "dark";
+    root.classList.toggle("dark", nextTheme === "dark");
+    root.style.colorScheme = nextTheme;
+    localStorage.setItem("digiuni-theme", nextTheme);
+    setDarkMode(nextTheme === "dark");
+  };
 
   const unread = notifications.filter((n) => n.unread).length;
 
@@ -306,6 +331,15 @@ export function AppShell({ children }: { children: ReactNode }) {
                 aria-label="DigiUni AI"
               >
                 <Sparkles className="size-5" />
+              </Button>
+
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+                onClick={toggleTheme}
+              >
+                {darkMode ? <SunMedium className="size-5" /> : <MoonStar className="size-5" />}
               </Button>
 
               <DropdownMenu>
