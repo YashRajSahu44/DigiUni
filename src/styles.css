@@ -62,7 +62,7 @@
 
 :root {
   --radius: 0.9rem;
-  --background: #fffaf7;
+  --background: #ffffff;
   --foreground: #2a1d18;
   --card: #ffffff;
   --card-foreground: #2a1d18;
@@ -73,7 +73,7 @@
   --primary-soft: #FDE8E0;
   --secondary: #fff3ee;
   --secondary-foreground: #4a2a22;
-  --muted: #fdf2ee;
+  --muted: #f6f6f6;
   --muted-foreground: #7a564d;
   --accent: #f8d4c7;
   --accent-foreground: #7a3f2d;
@@ -87,21 +87,21 @@
   --info-foreground: #fffaf8;
   --violet: oklch(0.58 0.17 295);
   --teal: oklch(0.6 0.1 190);
-  --border: #f3ddd5;
-  --input: #f3ddd5;
+  --border: #f1f1f1;
+  --input: #f1f1f1;
   --ring: #E97451;
   --chart-1: #E97451;
   --chart-2: #f29e6d;
   --chart-3: #f7c79f;
   --chart-4: #f0b4a1;
   --chart-5: #f7ddd0;
-  --sidebar: #fffdfb;
+  --sidebar: #ffffff;
   --sidebar-foreground: #3a251f;
   --sidebar-primary: #E97451;
   --sidebar-primary-foreground: #fffaf8;
   --sidebar-accent: #FDE8E0;
   --sidebar-accent-foreground: #7a3f2d;
-  --sidebar-border: #f5e3dc;
+  --sidebar-border: #f4f4f4;
   --sidebar-ring: #E97451;
   --gradient-brand: linear-gradient(135deg, #E97451 0%, #F39A6D 100%);
   --gradient-soft: linear-gradient(160deg, #fff7f3 0%, #fff0e8 100%);
